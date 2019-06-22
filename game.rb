@@ -1,7 +1,7 @@
 require_relative "deck"
 require_relative "pile"
 require_relative "ai_player"
-
+require_relative "player"
 
 class Game
     attr_accessor :king_piles, :reg_piles, :deck, :players
@@ -21,6 +21,8 @@ class Game
 
     def create_players(num = 4)
         num.times {self.players << AIPlayer.new(self.deck, self)}
+        # self.players << Player.new(self.deck, self, "Daniel")
+        # self.players << Player.new(self.deck, self, "Lil Gravy")
     end
 
     def start_turn
@@ -37,7 +39,8 @@ class Game
         
         piles_to_s
         puts "\n"
-        puts "#{winner[0]} won the game!"
+        puts "Jarvis won the game!" if winner[0].is_a? (AIPlayer)
+        puts "#{winner[0].name} won the game!" if winner[0].is_a?(Player)
     end
 
     def over? 

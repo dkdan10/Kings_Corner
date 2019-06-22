@@ -4,6 +4,7 @@ class Pile
 
     def initialize(deck)
         card = deck.take(1)[0]
+        
         @top_card = card
         @bottom_card = card
     end

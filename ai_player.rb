@@ -34,7 +34,7 @@ class AIPlayer
     end
 
     def get_valid_move_with_pile
-        
+        return nil if cards.count == 0
         self.game.reg_piles.each_with_index do |pile1|
             self.game.piles.each_with_index do |pile2|
                 return [pile1, pile2] if !pile1.bottom_card.nil? && !pile2.top_card.nil? && pile2.valid_play?(pile1.bottom_card) 
