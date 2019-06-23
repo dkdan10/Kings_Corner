@@ -13,10 +13,20 @@ class Game
         @players = []
         @current_turn = 0
 
-        (4).times do
-            @reg_piles << Pile.new(deck)
+        until @reg_piles.length == 4
+            pile_starter_card = deck.take(1)[0]
+            if pile_starter_card.value == :king
+                @king_piles << KingPile.new(pile_starter_card)
+            else
+                @reg_piles << Pile.new(pile_starter_card)
+            end
+        end
+
+        until @king_piles.length == 4
             @king_piles << KingPile.new
         end
+
+
     end
 
     def create_players(num = 4)
@@ -24,7 +34,7 @@ class Game
         # self.players << Player.new(self.deck, self, "Daniel")
         # self.players << Player.new(self.deck, self, "Lil Gravy")
     end
-
+    
     def start_turn
         players[@current_turn % players.length].play_turn
         @current_turn += 1

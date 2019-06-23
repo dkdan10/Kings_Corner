@@ -2,9 +2,7 @@
 class Pile
     attr_accessor :top_card, :bottom_card
 
-    def initialize(deck)
-        card = deck.take(1)[0]
-        
+    def initialize(card)
         @top_card = card
         @bottom_card = card
     end
@@ -38,9 +36,12 @@ end
 
 
 class KingPile < Pile
-    def initialize
-        @top_card = nil
-        @bottom_card = nil
+    def initialize(card = nil)
+        if !card.nil?
+            raise "Can't create king pile if card isn't king" if card.value != :king
+        end
+        @top_card = card #defaults to nil
+        @bottom_card = card #defaults to nil
     end
 
     def add_to(pile)
